@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drop by Drop</title>
+
+  <!-- Montserrat: a free font that closely evokes charity: water's
+       brand type (Proxima Nova / Avenir). Loaded from a CDN, so there's
+       no font file for you to download. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="container">
+
+    <h1>Drop<span class="by">by</span>Drop</h1>
+    <p class="game-instructions">
+      Hold to pour. Stop inside the yellow band to deliver a full container.
+      Overflow or come up short and the water is wasted.
+    </p>
+
+    <!-- DIFFICULTY: each mode changes the goal, how fast water pours,
+         how narrow the target band is, and how much waste you're allowed. -->
+    <div class="difficulty" id="difficulty">
+      <span class="difficulty-label">Difficulty:</span>
+      <button class="diff-btn" data-mode="easy">Easy</button>
+      <button class="diff-btn is-selected" data-mode="normal">Normal</button>
+      <button class="diff-btn" data-mode="hard">Hard</button>
+    </div>
+
+    <div class="stats">
+      <p>Delivered: <span id="delivered">0</span> / <span id="goal">8</span></p>
+      <p>Water wasted: <span id="wasted">0</span> / <span id="max-waste">4</span></p>
+    </div>
+
+    <!-- Milestone messages appear here as you deliver more containers. -->
+    <div id="achievements" class="achievement"></div>
+
+    <!-- The container that fills with water. -->
+    <div class="pour-area">
+      <div class="jug" id="jug">
+        <div class="target-band" id="target-band"></div>
+        <div class="water" id="water"></div>
+      </div>
+    </div>
+
+    <!-- Hold this to pour. -->
+    <button id="pour-btn" class="pour-btn" disabled>Hold to Pour</button>
+
+    <!-- Win / lose message. -->
+    <div id="end-message" class="end-message"></div>
+
+    <button id="start-game" class="start-btn">Start Game</button>
+
+    <!-- Functional links to charity: water. -->
+    <footer class="site-footer">
+      <p class="footer-tagline">Every drop counts. Help bring clean water to those who need it.</p>
+      <div class="footer-links">
+        <a href="https://www.charitywater.org" target="_blank" rel="noopener">Visit charity: water</a>
+        <a href="https://www.charitywater.org/donate" target="_blank" rel="noopener" class="donate-link">Donate</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+/* Charity: water Brand Colors & Fonts
+
+Primary:    Yellow #FFC907 | Blue #2E9DF7
+Secondary:  Light Blue #8BD1CB | Green #4FCB53 | Orange #FF902A
+            Red #F5402C | Dark Green #159A48 | Pink #F16061
+Brand font: Proxima Nova / Avenir  ->  web stand-in: Montserrat
+*/
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Montserrat', 'Avenir', Arial, sans-serif;
+  margin: 0;
+  padding: 30px;
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+}
+
+.container {
+  max-width: 620px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+}
+
+h1 .by {
+  color: #2E9DF7;
+  font-weight: 600;
+  margin: 0 6px;
+}
+
+.game-instructions {
+  font-size: 16px;
+  color: #555;
+  max-width: 440px;
+  margin: 0 auto 26px;
+}
+
+/* ---------- Difficulty ---------- */
+.difficulty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.difficulty-label { font-weight: 700; font-size: 15px; }
+.diff-btn {
+  background: #fff;
+  border: 2px solid #e2e2e2;
+  color: #1a1a1a;
+  padding: 8px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.diff-btn:hover { border-color: #2E9DF7; }
+.diff-btn.is-selected { background: #2E9DF7; border-color: #2E9DF7; color: #fff; }
+.diff-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- Stats ---------- */
+.stats {
+  display: flex;
+  justify-content: space-around;
+  background: #f5f7fa;
+  padding: 16px 0;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+.stats p { margin: 0; font-size: 16px; font-weight: 700; }
+.stats span { color: #2E9DF7; }
+
+/* ---------- Milestone banner ---------- */
+.achievement {
+  min-height: 26px;
+  font-weight: 700;
+  font-size: 17px;
+  color: #159A48;
+  margin-bottom: 14px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.achievement.show { opacity: 1; }
+
+/* ---------- The pouring container ---------- */
+.pour-area {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 24px;
+}
+
+.jug {
+  position: relative;
+  width: 150px;
+  height: 280px;
+  border: 4px solid #2E9DF7;
+  border-top: none;
+  border-radius: 0 0 22px 22px;
+  background: #f3f9ff;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+/* Water rises from the bottom; its height is set in JS. */
+.water {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, #5fb4f9 0%, #2E9DF7 100%);
+  border-top: 3px solid #8BD1CB;
+}
+
+/* The yellow target band — where you want to stop pouring.
+   Its position and height are set in JS each round. */
+.target-band {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 201, 7, 0.45);
+  border-top: 2px solid #FFC907;
+  border-bottom: 2px solid #FFC907;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Feedback glows on the jug. */
+.jug.success { box-shadow: 0 0 0 4px #4FCB53, 0 0 22px rgba(79, 203, 83, 0.6); }
+.jug.waste   { box-shadow: 0 0 0 4px #F5402C, 0 0 22px rgba(245, 64, 44, 0.6); }
+
+/* ---------- Pour button ---------- */
+.pour-btn {
+  background: #2E9DF7;
+  color: #fff;
+  border: none;
+  padding: 16px 48px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none; /* stops mobile scroll/long-press while pouring */
+  transition: transform 0.08s ease, background 0.2s;
+}
+.pour-btn:hover:not(:disabled) { background: #4aa9f8; }
+.pour-btn:active:not(:disabled) { transform: scale(0.97); background: #1f8de6; }
+.pour-btn:disabled { background: #cfd6dd; cursor: not-allowed; }
+
+/* ---------- End message ---------- */
+.end-message {
+  font-size: 19px;
+  font-weight: 700;
+  min-height: 24px;
+  margin: 22px 0 0;
+}
+.end-message.win  { color: #159A48; }
+.end-message.lose { color: #F5402C; }
+
+/* ---------- Start button ---------- */
+.start-btn {
+  background: #FFC907;
+  color: #1a1a1a;
+  border: none;
+  padding: 14px 36px;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  margin: 22px auto 0;
+  display: block;
+  transition: transform 0.1s ease, background 0.2s;
+}
+.start-btn:hover { background: #ffd534; }
+.start-btn:active { transform: scale(0.97); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+.footer-tagline { font-size: 14px; color: #777; margin: 0 0 16px; }
+.footer-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.footer-links a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  transition: all 0.15s ease;
+}
+.footer-links a:first-child { color: #2E9DF7; border: 2px solid #2E9DF7; }
+.footer-links a:first-child:hover { background: #2E9DF7; color: #fff; }
+.footer-links a.donate-link { background: #FFC907; color: #1a1a1a; }
+.footer-links a.donate-link:hover { background: #ffd534; }
+
+@media (prefers-reduced-motion: reduce) {
+  .water, .jug, .pour-btn, .start-btn { transition: none; }
+}
